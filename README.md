@@ -1,22 +1,14 @@
-# Xapi-project Docs [![Build Status](https://travis-ci.org/xapi-project/xapi-project.github.io.png)](https://travis-ci.org/xapi-project/xapi-project.github.io)
+# Xapi-project 文档 [![Build Status](https://travis-ci.org/xapi-project/xapi-project.github.io.png)](https://travis-ci.org/xapi-project/xapi-project.github.io)
 
-Documentation for the architecture of the Xapi toolstack.
+Xapi toolstack的架构文档.
 
-## Viewing the documentation
-This documentation is written in markdown and built with Jekyll. If you wish to
-browse the documentation, you can do so via the Github interface. Or, if you
-prefer, you can view the rendered output which is hosted using Github Pages.
+## 查看此文档
+此文档使用了markdown编写和Jekyll编译. 如果你希望查看本文档, 你可以通过Github或者如果你愿意，你可以浏览在Github Pages上的网页[http://xapi-project.github.io/].
 
-## Contributing documentation
-This repository is treated differently by Github. Due to its name, the `master`
-branch of this repository is compiled with Jekyll and hosted at
-[http://xapi-project.github.io/].
+## 为此文档做贡献
+此文档使用markdown编写，可以以有意义的文件夹的层级结构存放。 
 
-Documentation is written in markdown and can be placed in a semantically
-meaningful place in the directory hierarchy.
-
-A page must have the YAML front-matter for it to be compiled by Jekyll. The
-following boilerplate at the top of the file should suffice:
+因为需要被Jekyll编译，每一页必须有YAML front-matter. 下面的代码需要在每一页的头部出现:
 
 ```yaml
 ---
@@ -25,8 +17,7 @@ title: [title of page]
 ---
 ```
 
-Then, if you want the page to be accessible in the navigation menu, you need to
-make the following addition to `_data/navbar.yml`:
+然后，如果你想让此页通过导航菜单访问，你需要往`_data/navbar.yml`添加:
 
 ```diff
   - title: Section Name
@@ -35,13 +26,8 @@ make the following addition to `_data/navbar.yml`:
 +   - path/to/your-new-doc.md
 ```
 
-## Contributing design proposals
-Design proposals for new features and amendments to existing features can also
-be added to this repository. These will normally be more verbose in nature and
-contain more justification of decisions than a normal API doc. They may also
-not yet be in the toolstack so we want to keep them separate. To create such
-a document create a Markdown file in a place of your choosing with the
-following YAML front-matter:
+## 设计建议
+在这个repository里还可以提供新功能的设计建议和已有功能的修改建议.更普通的API文档相比，这会通常很冗长，而且有争议. 因为还没有在toolstack总，所以我们希望把它独立出来. 要创建这样的文档请在页头添加:
 
 ```yaml
 ---
@@ -53,41 +39,36 @@ revision: [iteration of document]
 ---
 ```
 
-## Previewing documentation before pushing
+## 在pushing之前要预览文档
 
-If you wish to preview the site that will be generated before pushing, you can
-do so from your own machine.
+如果你希望在生成pushing之前预览整个网站，你可以在自己的机器上这样做.
 
-Install the `github-pages` gem (this includes `jekyll`):
+安装Jekyll:
 
 ```
-$ gem install github-pages
+$ gem install jekyll
 ```
 
-Then you can host the site locally with the following command from the root
-directory of this repository:
+然后你可以在本地运行这个repository:
 
 ```
 $ jekyll serve -w --baseurl '/xapi-project'
 ```
 
-You will then be able to view the page at `localhost:4000/xapi-project`.
+你应该可以访问这个网页 `localhost:4000/xapi-project`.
 
-For more detailed setup (or if you do not have the correct prerequisite ruby environment, check out [these instructions](https://help.github.com/articles/using-jekyll-with-pages/#installing-jekyll).
-
-## A note on images
-If you are contributing images, consider compressing them to keep this repo as
-slim as possible:
+## 关于图片
+如果你想贡献图片，考虑把它压缩了以保持这个repository尽可能的小:
 
 ```
 convert -resize 900 -background white -colors 256 [input.png] [output.png]
 ```
 
-If you wish to include a message sequence chart, consider using
-[js-sequence-diagrams](http://bramp.github.io/js-sequence-diagrams/) and
-check in the created .svg.
+如果你想加载一个动态图, 考虑使用
+[js-sequence-diagrams](http://bramp.github.io/js-sequence-diagrams/) 然后检查创建好的.svg文件.
 
-## Adding links to other parts of the site
-Relative links should work, but should you wish to refer to a page outside of
-the current section, you should prepend `{{site.baseurl}}` so that it will work
-in whichever repo we choose to host it and also when viewed locally.
+## 给网站的其他部分添加连接
+相对路径应该可以工作，但是如果你想链接到外部的网址, 你可以添加 `{{site.baseurl}}` 然后它就可以在任意的repo或者本地访问了.
+
+## 译者说明
+Xapi是一个伟大的开源项目，它是XenServer的灵魂，希望未来它更加稳定，开放，兼容性更好.
