@@ -3,28 +3,14 @@ title: Disaster Recovery
 layout: default
 ---
 
-The [HA](../HA/HA.html) feature will restart VMs after hosts have failed, but what
-happens if a whole site (e.g. datacenter) is lost? A disaster recovery
-configuration is shown in the following diagram:
+[高可用(HA)](../HA/HA.html)的功能在主机出问题时会重启虚拟机, 但是如果整个机房都出问题呢? 下图显示了如何配置灾难恢复:
 
 ![Disaster recovery maintaining a secondary site](dr.png)
 
-We rely on the storage array's built-in mirroring to replicate (synchronously
-or asynchronously: the admin's choice) between the primary and the secondary
-site. When DR is enabled the VM disk data and VM metadata are written to the
-storage server and mirrored. The secondary site contains the other side
-of the data mirror and a set of hosts, which may be powered off.
+我们依赖存储序列内置的主站点和副站点的数据镜像(同步或者异步: 根据管理员的选择)功能. 当配置了灾难恢复时虚拟机的磁盘和metadata会被写入到存储并且被镜像. 副站点包含主站点的镜像数据和一组可能是处于关机状态的主机.
 
-In normal operation, the DR feature allows a "dry-run" recovery where a host
-on the secondary site checks that it can indeed see all the VM disk data
-and metadata. This should be done regularly, so that admins are familiar with
-the process.
+在正常的操作时, 灾难恢复功能允许 "dry-run" 一次恢复，用来检查虚拟机的数据和虚拟磁盘的数据. 这种检查应该定期执行, 以便管理员熟悉这个流程.
 
-After a disaster, the admin breaks the mirror on the secondary site and triggers
-a remote power-on of the offline hosts (either using an out-of-band tool or
-  the built-in host power-on feature of xapi). The pool master on the secondary
-site can connect to the storage and extract all the VM metadata. Finally the
-VMs can all be restarted.
+当灾难发生的时候, 管理员取消到副站点的镜像, 同时将关闭状态的主机远程开机 (可以使用out-of-band工具或者xapi内置的开机功能). 副站点的主节点可以连接存储并且提取虚拟机的数据. 最终所有的虚拟机可以恢复运行.
 
-When the primary site is fully recovered, the mirror can be re-synchronised
-and the VMs can be moved back.
+当主站点恢复之后, 数据镜像可以重新被同步并且虚拟机可以被转移回来.
